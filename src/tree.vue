@@ -91,8 +91,8 @@
       initializeDataItem (item) {
         function Model(item, textFieldName, valueFieldName) {
           this.id = item.id || ITEM_ID++
-          this[textFieldName] = item[textFieldName] || ''
-          this[valueFieldName] = item[valueFieldName] || item[textFieldName]
+          this.text = item[textFieldName] || ''
+          this.value = item[valueFieldName] || item[textFieldName]
           this.icon = item.icon || ''
           this.opened = item.opened || false
           this.selected = item.selected || false
