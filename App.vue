@@ -14,7 +14,7 @@
               allow-batch
               whole-row
               draggable
-              @item-click="itemClick"
+              @item-drop="itemDrop"
               ref="tree">
           </v-jstree>
         </div>
@@ -29,7 +29,14 @@
     <div>
       <div style="width:840px; margin: 0 auto;">
         <div style="width:49%; display:inline-block; vertical-align: top;">
-          <v-jstree :data="asyncData" :async="loadData" show-checkbox multiple allow-batch whole-row @item-click="itemClick"></v-jstree>
+          <v-jstree
+              :data="asyncData"
+              :async="loadData"
+              show-checkbox
+              multiple
+              allow-batch
+              whole-row>
+          </v-jstree>
         </div>
         <div style="width:50%; display:inline-block; vertical-align: top;">
         <textarea style="height:300px; width:100%;">
@@ -140,8 +147,8 @@
       }
     },
     methods: {
-      itemClick (node) {
-        console.log(node.model.text + ' clicked !')
+      itemDrop (node) {
+        console.log('dropped', node.title)
       }
     }
   }

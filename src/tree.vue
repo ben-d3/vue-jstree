@@ -194,6 +194,8 @@
           }
           oriItem.children = oriItem.children ? oriItem.children.concat(this.draggedItem.item) : [this.draggedItem.item]
           oriItem.opened = true
+          this.$emit('item-drop', this.draggedItem.item, oriItem)
+
           var self = Object.assign({}, this)
           this.$nextTick(() => {
             self.draggedItem.parentItem.splice(self.draggedItem.index, 1)

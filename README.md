@@ -14,7 +14,7 @@
 
 ```html
     import VJstree from 'vue-jstree'
-    
+
     new Vue({
       components: {
         VJstree
@@ -33,7 +33,7 @@
 
 ```html
     <v-jstree :data="data" show-checkbox multiple allow-batch whole-row @item-click="itemClick"></v-jstree>
-    
+
     new Vue({
       data: {
         data: [
@@ -117,6 +117,8 @@
 
 ## API
 
+### Vue Props
+
 | Props        | Type           | Default  |
 | ------------- |:-------------:| -----:|
 | data      | Array |  |
@@ -133,7 +135,7 @@
 | draggable | Boolean      |    false |
 | klass | String      |     |
 
-## Data Item Optional Properties
+### Data Item Optional Properties
 
 | Name        | Type           | Default  |
 | ------------- |:-------------:| -----:|
@@ -142,6 +144,11 @@
 | selected | Boolean      |    false |
 | disabled | Boolean      |    false |
 
+### Events
+
+`item-click(item)`
+
+`item-drop(child, parent)`
 
 ## License
 
