@@ -89,7 +89,7 @@
         }
       },
       initializeDataItem (item) {
-        function Model(item, textFieldName, valueFieldName) {
+        function Model (item, textFieldName, valueFieldName) {
           this.id = item.id || ITEM_ID++
           this.text = item[textFieldName] || ''
           this.value = item[valueFieldName] || item[textFieldName]
@@ -121,9 +121,9 @@
       },
       onItemClick (oriNode, oriItem) {
         if (this.multiple) {
-            if (this.allowBatch) {
-                this.handleBatchSelectItems(oriNode, oriItem)
-            }
+          if (this.allowBatch) {
+            this.handleBatchSelectItems(oriNode, oriItem)
+          }
         } else {
           this.handleSingleSelectItems(oriNode, oriItem)
         }
@@ -165,9 +165,9 @@
         }
       },
       onItemDragStart (e, oriNode, oriItem) {
-        if (!this.draggable)
-          return false
-        e.dataTransfer.effectAllowed = "move"
+        if (!this.draggable) { return false }
+
+        e.dataTransfer.effectAllowed = 'move'
         e.dataTransfer.setData('text', null)
         this.draggedItem = {
           item: oriItem,
@@ -176,31 +176,32 @@
         }
       },
       onItemDragEnd (e, oriNode, oriItem) {
-        if (!this.draggable)
-          return false
+        if (!this.draggable) { return false }
         this.draggedItem = null
       },
       onItemDrop (e, oriNode, oriItem) {
-        if (!this.draggable)
+        if (!this.draggable) {
           return false
+        }
+
         if (this.draggedItem) {
-          if (this.draggedItem.parentItem === oriItem.children
-            || this.draggedItem.item === oriItem
-            || (oriItem.children && oriItem.children.indexOf(this.draggedItem.item) !== -1)) {
-            return;
+          if (this.draggedItem.parentItem === oriItem.children ||
+            this.draggedItem.item === oriItem ||
+            (oriItem.children && oriItem.children.indexOf(this.draggedItem.item) !== -1)) {
+            return
           }
-          oriItem.children = oriItem.children ?  oriItem.children.concat(this.draggedItem.item) : [this.draggedItem.item]
-          var self = this
+          oriItem.children = oriItem.children ? oriItem.children.concat(this.draggedItem.item) : [this.draggedItem.item]
+          oriItem.opened = true
+          var self = Object.assign({}, this)
           this.$nextTick(() => {
             self.draggedItem.parentItem.splice(self.draggedItem.index, 1)
           })
         }
       }
     },
-    created () {
-      this.initializeData(this.data)
-    },
     mounted () {
+      this.initializeData(this.data)
+
       if (this.async) {
         this.$set(this.data, 0, this.initializeLoading())
         this.handleAsyncLoad(this.data, this)
@@ -208,6 +209,11 @@
     },
     components: {
       TreeItem
+    },
+    watch: {
+      data () {
+        this.initializeData(this.data)
+      }
     }
   }
 </script>

@@ -6,7 +6,17 @@
     <div>
       <div style="width:840px; margin: 0 auto;">
         <div style="width:49%; display:inline-block; vertical-align: top;">
-          <v-jstree :data="data" show-checkbox multiple allow-batch whole-row draggable @item-click="itemClick" ref="tree"></v-jstree>
+          <v-jstree
+              :data="data"
+              text-field-name="title"
+              show-checkbox
+              multiple
+              allow-batch
+              whole-row
+              draggable
+              @item-click="itemClick"
+              ref="tree">
+          </v-jstree>
         </div>
         <div style="width:50%; display:inline-block;">
         <textarea  style="height:300px; width:100%;">

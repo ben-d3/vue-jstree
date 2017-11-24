@@ -34,8 +34,6 @@
     </li>
 </template>
 <script>
-
-
   export default {
     name: 'TreeItem',
     props: {
@@ -72,16 +70,15 @@
     watch: {
       isDragEnter (newValue) {
         if (newValue) {
-          this.$el.style.backgroundColor = "#C9FDC9"
+          this.$el.style.backgroundColor = '#C9FDC9'
         } else {
-          this.$el.style.backgroundColor = "inherit"
+          this.$el.style.backgroundColor = 'inherit'
         }
       },
       data (newValue) {
         this.model = newValue
       }
-      }
-    ,
+    },
     computed: {
       isFolder () {
         return this.model.children && this.model.children.length
@@ -133,7 +130,7 @@
       }
     },
     methods: {
-      handleRecursionNodeParents(node, func) {
+      handleRecursionNodeParents (node, func) {
         if (node.$parent) {
           func(node.$parent)
           this.handleRecursionNodeParents(node.$parent, func)
@@ -176,7 +173,7 @@
         this.onItemClick(this, this.model)
       },
       handleItemDrop (e, oriNode, oriItem) {
-        this.$el.style.backgroundColor = "inherit"
+        this.$el.style.backgroundColor = 'inherit'
         this.onItemDrop(e, oriNode, oriItem)
       }
     },
