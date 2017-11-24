@@ -1,12 +1,13 @@
 var path = require('path')
 var webpack = require('webpack')
 
+function resolve (dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
-  //entry: './main.js',
-  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    //publicPath: '/dist/',
+    path: resolve('./dist'),
     publicPath: 'dist/',
     filename: 'vue-jstree.js',
     library: 'vue-jstree',
@@ -15,6 +16,12 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [ resolve('src') ]
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -82,4 +89,10 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true
     })
   ])
+}
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.entry = './src/index.js'
+} else {
+  module.exports.entry = './main.js'
 }
