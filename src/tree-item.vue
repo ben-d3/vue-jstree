@@ -13,22 +13,24 @@
         <div :class="anchorClasses" @click="handleItemClick" @mouseover="isHover=true" @mouseout="isHover=false">
             <i class="tree-icon tree-checkbox" role="presentation" v-if="showCheckbox && !model.loading"></i>
             <i :class="themeIconClasses" role="presentation" v-if="!model.loading"></i>
-            {{model.text}}
+            {{ itemText }}
         </div>
         <ul role="group" ref="group" class="tree-children" v-if="isFolder">
             <tree-item v-for="(child, index) in model.children"
-                       :key="index"
-                       :data="child"
-                       :whole-row="wholeRow"
-                       :show-checkbox="showCheckbox"
-                       :height= "height"
-                       :parent-item="model.children"
-                       :draggable="draggable"
-                       :on-item-click="onItemClick"
-                       :on-item-toggle="onItemToggle"
-                       :on-item-drag-start="onItemDragStart"
-                       :on-item-drag-end="onItemDragEnd"
-                       :on-item-drop="onItemDrop">
+                :key="index"
+                :data="child"
+                :text-field-name="textFieldName"
+                :value-field-name="valueFieldName"
+                :whole-row="wholeRow"
+                :show-checkbox="showCheckbox"
+                :height= "height"
+                :parent-item="model.children"
+                :draggable="draggable"
+                :on-item-click="onItemClick"
+                :on-item-toggle="onItemToggle"
+                :on-item-drag-start="onItemDragStart"
+                :on-item-drag-end="onItemDragEnd"
+                :on-item-drop="onItemDrop">
             </tree-item>
         </ul>
     </li>
@@ -38,6 +40,8 @@
     name: 'TreeItem',
     props: {
       data: {type: Object, required: true},
+      textFieldName: {type: String, default: 'text'},
+      valueFieldName: {type: String, default: 'value'},
       wholeRow: {type: Boolean, default: false},
       showCheckbox: {type: Boolean, default: false},
       height: {type: Number, default: 24},
@@ -80,6 +84,9 @@
       }
     },
     computed: {
+      itemText () {
+        return this.model[this.textFieldName]
+      },
       isFolder () {
         return this.model.children && this.model.children.length
       },

@@ -19,8 +19,8 @@
           </v-jstree>
         </div>
         <div style="width:50%; display:inline-block;">
-        <textarea  style="height:300px; width:100%;">
-          {{data}}
+        <textarea style="height:300px; width:100%;">
+          {{ data }}
         </textarea>
         </div>
       </div>
@@ -32,8 +32,8 @@
           <v-jstree :data="asyncData" :async="loadData" show-checkbox multiple allow-batch whole-row @item-click="itemClick"></v-jstree>
         </div>
         <div style="width:50%; display:inline-block; vertical-align: top;">
-        <textarea  style="height:300px; width:100%;">
-          {{asyncData}}
+        <textarea style="height:300px; width:100%;">
+          {{ asyncData }}
         </textarea>
         </div>
       </div>
@@ -49,72 +49,72 @@
         msg: 'A Tree Plugin For Vue2',
         data: [
           {
-            "text": "Same but with checkboxes",
-            "children": [
+            'title': 'Same but with checkboxes',
+            'children': [
               {
-                "text": "initially selected",
-                "selected": true
+                'title': 'initially selected',
+                'selected': true
               },
               {
-                "text": "custom icon",
-                "icon": "fa fa-warning icon-state-danger"
+                'title': 'custom icon',
+                'icon': 'fa fa-warning icon-state-danger'
               },
               {
-                "text": "initially open",
-                "icon": "fa fa-folder icon-state-default",
-                "opened": true,
-                "children": [
+                'title': 'initially open',
+                'icon': 'fa fa-folder icon-state-default',
+                'opened': true,
+                'children': [
                   {
-                    "text": "Another node"
+                    'title': 'Another node'
                   }
                 ]
               },
               {
-                "text": "custom icon",
-                "icon": "fa fa-warning icon-state-warning"
+                'title': 'custom icon',
+                'icon': 'fa fa-warning icon-state-warning'
               },
               {
-                "text": "disabled node",
-                "icon": "fa fa-check icon-state-success",
-                "disabled": true
+                'title': 'disabled node',
+                'icon': 'fa fa-check icon-state-success',
+                'disabled': true
               }
             ]
           },
           {
-            "text": "Same but with checkboxes",
-            "opened": true,
-            "children": [
+            'title': 'Same but with checkboxes',
+            'opened': true,
+            'children': [
               {
-                "text": "initially selected",
-                "selected": true
+                'title': 'initially selected',
+                'selected': true
               },
               {
-                "text": "custom icon",
-                "icon": "fa fa-warning icon-state-danger"
+                'title': 'custom icon',
+                'icon': 'fa fa-warning icon-state-danger'
               },
               {
-                "text": "initially open",
-                "icon": "fa fa-folder icon-state-default",
-                "opened": true,
-                "children": [
+                'title': 'initially open',
+                'icon': 'fa fa-folder icon-state-default',
+                'opened': true,
+                'children': [
                   {
-                    "text": "Another node"
+                    'title': 'Another node'
                   }
                 ]
               },
               {
-                "text": "custom icon",
-                "icon": "fa fa-warning icon-state-warning"
+                'title': 'custom icon',
+                'icon': 'fa fa-warning icon-state-warning'
               },
               {
-                "text": "disabled node",
-                "icon": "fa fa-check icon-state-success",
-                "disabled": true
+                'title': 'disabled node',
+                'icon': 'fa fa-check icon-state-success',
+                'disabled': true
               }
             ]
           },
           {
-            "text": "And wholerow selection"
+            'title': 'And wholerow selection'
           }
         ],
         asyncData: [],
@@ -124,14 +124,13 @@
             let data = []
             if (id > 20) {
               data = []
-            }
-            else {
+            } else {
               data = [
                 {
-                  "text": "New Item 1..." + id
+                  'text': 'New Item 1...' + id
                 },
                 {
-                  "text": "New Item 2..." + id
+                  'text': 'New Item 2...' + id
                 }
               ]
             }

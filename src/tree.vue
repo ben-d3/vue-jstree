@@ -1,23 +1,25 @@
 <template>
-    <div :class="classes" role="tree" onselectstart="return false">
-        <ul :class="containerClasses" role="group">
-            <tree-item v-for="(child, index) in data"
-                       :key="index"
-                       :data="child"
-                       :whole-row="wholeRow"
-                       :show-checkbox="showCheckbox"
-                       :height="sizeHight"
-                       :parent-item="data"
-                       :draggable="draggable"
-                       :on-item-click="onItemClick"
-                       :on-item-toggle="onItemToggle"
-                       :on-item-drag-start="onItemDragStart"
-                       :on-item-drag-end="onItemDragEnd"
-                       :on-item-drop="onItemDrop"
-                       :klass="index === data.length-1?'tree-last':''">
-            </tree-item>
-        </ul>
-    </div>
+  <div :class="classes" role="tree" onselectstart="return false">
+    <ul :class="containerClasses" role="group">
+      <tree-item v-for="(child, index) in data"
+          :key="index"
+          :data="child"
+          :text-field-name="textFieldName"
+          :value-field-name="valueFieldName"
+          :whole-row="wholeRow"
+          :show-checkbox="showCheckbox"
+          :height="sizeHight"
+          :parent-item="data"
+          :draggable="draggable"
+          :on-item-click="onItemClick"
+          :on-item-toggle="onItemToggle"
+          :on-item-drag-start="onItemDragStart"
+          :on-item-drag-end="onItemDragEnd"
+          :on-item-drop="onItemDrop"
+          :klass="index === data.length-1?'tree-last':''">
+      </tree-item>
+    </ul>
+  </div>
 </template>
 <script>
   import TreeItem from './tree-item.vue'
@@ -91,8 +93,8 @@
       initializeDataItem (item) {
         function Model (item, textFieldName, valueFieldName) {
           this.id = item.id || ITEM_ID++
-          this.text = item[textFieldName] || ''
-          this.value = item[valueFieldName] || item[textFieldName]
+          this[textFieldName] = item[textFieldName] || ''
+          this[valueFieldName] = item[valueFieldName] || item[textFieldName]
           this.icon = item.icon || ''
           this.opened = item.opened || false
           this.selected = item.selected || false
