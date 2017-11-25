@@ -5,7 +5,6 @@
           :key="index"
           :item="child"
           :text-field-name="textFieldName"
-          :value-field-name="valueFieldName"
           :whole-row="wholeRow"
           :show-checkbox="showCheckbox"
           :height="sizeHight"
@@ -27,7 +26,6 @@
 <script>
   import TreeItem from './tree-item.vue'
 
-  let ITEM_ID = 0
   let ITEM_HEIGHT_SMALL = 18
   let ITEM_HEIGHT_DEFAULT = 24
   let ITEM_HEIGHT_LARGE = 32
@@ -43,7 +41,6 @@
       multiple: {type: Boolean, default: false},
       allowBatch: {type: Boolean, default: false},
       textFieldName: {type: String, default: 'text'},
-      valueFieldName: {type: String, default: 'value'},
       async: {type: Function},
       loadingText: {type: String, default: 'Loading...'},
       draggable: {type: Boolean, default: false},
@@ -94,18 +91,18 @@
         }
       },
       initializeDataItem (item) {
-        function Model (item, textFieldName, valueFieldName) {
-          this.id = item.id || ITEM_ID++
-          this[textFieldName] = item[textFieldName] || ''
-          this[valueFieldName] = item[valueFieldName] || item[textFieldName]
-          this.icon = item.icon || ''
-          this.opened = item.opened || false
-          this.selected = item.selected || false
-          this.disabled = item.disabled || false
-          this.loading = item.loading || false
-          this.children = item.children || []
+        let model = {
+          item: item.item,
+          icon: item.icon || '',
+          opened: item.opened || false,
+          selected: item.selected || false,
+          disabled: item.disabled || false,
+          loading: item.loading || false,
+          children: item.children || []
         }
-        return new Model(item, this.textFieldName, this.valueFieldName)
+
+        model[this.textFieldName] = item[this.textFieldName] || ''
+        return model
       },
       initializeLoading () {
         var item = {}

@@ -24,12 +24,11 @@
       </slot>
     </div>
 
-    <ul role="group" ref="group" class="tree-children" v-if="isFolder">
+    <ul role="group" ref="group" class="tree-children" v-if="isFolder" v-show="model.opened">
       <tree-item v-for="(child, index) in model.children"
           :key="index"
           :item="child"
           :text-field-name="textFieldName"
-          :value-field-name="valueFieldName"
           :whole-row="wholeRow"
           :show-checkbox="showCheckbox"
           :height= "height"
@@ -53,7 +52,6 @@
     props: {
       item: {type: Object, required: true},
       textFieldName: {type: String, default: 'text'},
-      valueFieldName: {type: String, default: 'value'},
       wholeRow: {type: Boolean, default: false},
       showCheckbox: {type: Boolean, default: false},
       height: {type: Number, default: 24},
@@ -159,7 +157,7 @@
         if (this.isFolder) {
           this.model.opened = !this.model.opened
           this.onItemToggle(this, this.model)
-          this.handleSetGroupMaxHeight()
+          // this.handleSetGroupMaxHeight()
         }
       },
       handleGroupMaxHeight () {
@@ -197,7 +195,7 @@
       }
     },
     mounted () {
-      this.handleSetGroupMaxHeight()
+      // this.handleSetGroupMaxHeight()
     }
   }
 </script>

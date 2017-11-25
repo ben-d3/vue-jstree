@@ -1,12 +1,20 @@
 .tree-theme (@base-height, @image, @image-height) {
 	@correction: (@image-height - @base-height) / 2;
 
-	.tree-node { min-height:@base-height; line-height:@base-height; margin-left:@base-height + 6; min-width:@base-height; }
-	.tree-anchor { line-height:@base-height; height:@base-height; }
+	.tree-node {
+		min-height:@base-height;
+		line-height:@base-height;
+		margin-left:@base-height + 6;
+		min-width:@base-height;
+		position: relative;
+	}
+	.tree-anchor {
+		width: 100%;
+	}
 	.tree-icon { width:@base-height; height:@base-height; line-height:@base-height; }
 	.tree-icon:empty { width:@base-height; height:@base-height; line-height:@base-height; }
 	&.tree-rtl .tree-node { margin-right:@base-height; }
-	.tree-wholerow { height:@base-height; }
+	.tree-wholerow { height: 100%; }
 
 	.tree-node,
 	.tree-icon { background-image:url("@{image}"); }
@@ -81,7 +89,10 @@
 	.tree-file { background:url("@{image}") -(@image-height * 3 + @correction) -(@image-height * 2 + @correction) no-repeat; }
 	.tree-folder { background:url("@{image}") -(@image-height * 8 + @correction) -(@correction) no-repeat; }
 
-	> .tree-container-ul > .tree-node { margin-left:0; margin-right:0; }
+	> .tree-container-ul > .tree-node {
+		margin-left:0;
+		margin-right:0;
+	}
 
 	// ellipsis
 	.tree-ellipsis { overflow: hidden; }
