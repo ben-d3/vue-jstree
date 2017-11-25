@@ -112,8 +112,8 @@
         return this.initializeDataItem(item)
       },
       handleRecursionNodeChilds (node, func) {
-        if (node.$children && node.$children.length > 0) {
-          for (let childNode of node.$children) {
+        if (node.children && node.children.length > 0) {
+          for (let childNode of node.children) {
             if (!childNode.disabled) {
               func(childNode)
               this.handleRecursionNodeChilds(childNode, func)
@@ -138,9 +138,10 @@
         oriNode.model.selected = true
       },
       handleBatchSelectItems (oriNode, oriItem) {
-        this.handleRecursionNodeChilds(oriNode, node => {
-          if (node.model.disabled) return
-          node.model.selected = oriNode.model.selected
+        const allSelected = oriItem.selected
+        this.handleRecursionNodeChilds(oriItem, node => {
+          if (node.disabled) return
+          node.selected = allSelected
         })
       },
       onItemToggle (oriNode, oriItem) {
