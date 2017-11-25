@@ -17,7 +17,12 @@
           :on-item-drop="onItemDrop"
           :klass="index === data.length-1?'tree-last':''">
         <template slot-scope="_">
-          <slot :vm="_.vm" :item="_.item">{{ _.item.title }}</slot>
+          <slot :vm="_.vm"
+              :item="_.item"
+              :selected="_.selected"
+              :opened="_.opened">
+            {{ _.item.title }}
+          </slot>
         </template>
       </tree-item>
     </ul>

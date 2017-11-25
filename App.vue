@@ -17,7 +17,7 @@
               @item-drop="itemDrop"
               ref="tree">
             <template slot-scope="props">
-              AA{{ props.item.title }}
+              {{ props.selected }} {{ props.item.title }}
             </template>
           </v-jstree>
         </div>

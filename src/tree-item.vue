@@ -18,7 +18,10 @@
       <i class="tree-icon tree-checkbox"
           role="presentation"
           v-if="showCheckbox && !model.loading"></i>
-      <slot :vm="this" :item="item">
+      <slot :vm="this"
+          :item="item"
+          :selected="model.selected"
+          :opened="model.opened">
         <i :class="themeIconClasses" role="presentation" v-if="!model.loading"></i>
         {{ itemText }}
       </slot>
@@ -40,7 +43,11 @@
           :on-item-drag-end="onItemDragEnd"
           :on-item-drop="onItemDrop">
           <template slot-scope="_">
-            <slot :vm="_.vm" :item="_.item"></slot>
+            <slot :vm="_.vm"
+                :item="_.item"
+                :selected="_.selected"
+                :opened="_.opened">
+            </slot>
           </template>
       </tree-item>
     </ul>
