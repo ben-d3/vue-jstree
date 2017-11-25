@@ -3,7 +3,7 @@
     <ul :class="containerClasses" role="group">
       <tree-item v-for="(child, index) in data"
           :key="index"
-          :data="child"
+          :item="child"
           :text-field-name="textFieldName"
           :value-field-name="valueFieldName"
           :whole-row="wholeRow"
@@ -17,6 +17,9 @@
           :on-item-drag-end="onItemDragEnd"
           :on-item-drop="onItemDrop"
           :klass="index === data.length-1?'tree-last':''">
+        <template slot-scope="_">
+          <slot :vm="_.vm" :item="_.item">{{ _.item.title }}</slot>
+        </template>
       </tree-item>
     </ul>
   </div>

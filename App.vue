@@ -16,6 +16,9 @@
               draggable
               @item-drop="itemDrop"
               ref="tree">
+            <template slot-scope="props">
+              AA{{ props.item.title }}
+            </template>
           </v-jstree>
         </div>
         <div style="width:50%; display:inline-block;">
@@ -126,6 +129,7 @@
         ],
         asyncData: [],
         loadData: (oriNode, resolve) => {
+          console.log(oriNode)
           var id = oriNode.data.id ? oriNode.data.id : 0
           setTimeout(() => {
             let data = []

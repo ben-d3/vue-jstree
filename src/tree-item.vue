@@ -1,45 +1,57 @@
 <template>
-    <li role="treeitem"
-        :class="classes"
-        :draggable="draggable"
-        @dragstart.stop="onItemDragStart($event, _self, _self.model)"
-        @dragend.stop.prevent="onItemDragEnd($event, _self, _self.model)"
-        @dragover.stop.prevent="() => false"
-        @dragenter.stop.prevent="isDragEnter = true"
-        @dragleave.stop.prevent="isDragEnter = false"
-        @drop.stop.prevent="handleItemDrop($event, _self, _self.model)">
-        <div role="presentation" :class="wholeRowClasses" v-if="isWholeRow">&nbsp;</div>
-        <i class="tree-icon tree-ocl" role="presentation" @click="handleItemToggle"></i>
-        <div :class="anchorClasses" @click="handleItemClick" @mouseover="isHover=true" @mouseout="isHover=false">
-            <i class="tree-icon tree-checkbox" role="presentation" v-if="showCheckbox && !model.loading"></i>
-            <i :class="themeIconClasses" role="presentation" v-if="!model.loading"></i>
-            {{ itemText }}
-        </div>
-        <ul role="group" ref="group" class="tree-children" v-if="isFolder">
-            <tree-item v-for="(child, index) in model.children"
-                :key="index"
-                :data="child"
-                :text-field-name="textFieldName"
-                :value-field-name="valueFieldName"
-                :whole-row="wholeRow"
-                :show-checkbox="showCheckbox"
-                :height= "height"
-                :parent-item="model.children"
-                :draggable="draggable"
-                :on-item-click="onItemClick"
-                :on-item-toggle="onItemToggle"
-                :on-item-drag-start="onItemDragStart"
-                :on-item-drag-end="onItemDragEnd"
-                :on-item-drop="onItemDrop">
-            </tree-item>
-        </ul>
-    </li>
+  <li role="treeitem"
+      :class="classes"
+      :draggable="draggable"
+      @dragstart.stop="onItemDragStart($event, _self, _self.model)"
+      @dragend.stop.prevent="onItemDragEnd($event, _self, _self.model)"
+      @dragover.stop.prevent="() => false"
+      @dragenter.stop.prevent="isDragEnter = true"
+      @dragleave.stop.prevent="isDragEnter = false"
+      @drop.stop.prevent="handleItemDrop($event, _self, _self.model)">
+    <div role="presentation" :class="wholeRowClasses" v-if="isWholeRow">&nbsp;</div>
+    <i class="tree-icon tree-ocl" role="presentation" @click="handleItemToggle"></i>
+    <div
+        :class="anchorClasses"
+        @click="handleItemClick"
+        @mouseover="isHover = true"
+        @mouseout="isHover = false">
+      <i class="tree-icon tree-checkbox"
+          role="presentation"
+          v-if="showCheckbox && !model.loading"></i>
+      <slot :vm="this" :item="item">
+        <i :class="themeIconClasses" role="presentation" v-if="!model.loading"></i>
+        {{ itemText }}
+      </slot>
+    </div>
+
+    <ul role="group" ref="group" class="tree-children" v-if="isFolder">
+      <tree-item v-for="(child, index) in model.children"
+          :key="index"
+          :item="child"
+          :text-field-name="textFieldName"
+          :value-field-name="valueFieldName"
+          :whole-row="wholeRow"
+          :show-checkbox="showCheckbox"
+          :height= "height"
+          :parent-item="model.children"
+          :draggable="draggable"
+          :on-item-click="onItemClick"
+          :on-item-toggle="onItemToggle"
+          :on-item-drag-start="onItemDragStart"
+          :on-item-drag-end="onItemDragEnd"
+          :on-item-drop="onItemDrop">
+          <template slot-scope="_">
+            <slot :vm="_.vm" :item="_.item"></slot>
+          </template>
+      </tree-item>
+    </ul>
+  </li>
 </template>
 <script>
   export default {
     name: 'TreeItem',
     props: {
-      data: {type: Object, required: true},
+      item: {type: Object, required: true},
       textFieldName: {type: String, default: 'text'},
       valueFieldName: {type: String, default: 'value'},
       wholeRow: {type: Boolean, default: false},
@@ -68,7 +80,7 @@
       return {
         isHover: false,
         isDragEnter: false,
-        model: this.data
+        model: this.item
       }
     },
     watch: {
@@ -79,7 +91,7 @@
           this.$el.style.backgroundColor = 'inherit'
         }
       },
-      data (newValue) {
+      item (newValue) {
         this.model = newValue
       }
     },
