@@ -19,6 +19,7 @@
         <template slot-scope="_">
           <slot :vm="_.vm"
               :item="_.item"
+              :children="_.children"
               :selected="_.selected"
               :opened="_.opened">
             {{ _.item.title }}

@@ -20,6 +20,7 @@
           v-if="showCheckbox && !model.loading"></i>
       <slot :vm="this"
           :item="item"
+          :children="model.children"
           :selected="model.selected"
           :opened="model.opened">
         <i :class="themeIconClasses" role="presentation" v-if="!model.loading"></i>
@@ -45,6 +46,7 @@
           <template slot-scope="_">
             <slot :vm="_.vm"
                 :item="_.item"
+                :children="_.children"
                 :selected="_.selected"
                 :opened="_.opened">
             </slot>
